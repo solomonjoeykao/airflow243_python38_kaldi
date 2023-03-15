@@ -359,7 +359,7 @@ function install_airflow_dependencies_from_branch_tip() {
       --constraint "${AIRFLOW_CONSTRAINTS_LOCATION}" || true
     # make sure correct PIP version is used
     pip3 install --disable-pip-version-check "pip==${AIRFLOW_PIP_VERSION}" 2>/dev/null
-    pip3 freeze | grep apache-airflow-providers | xargs pip uninstall --yes 2>/dev/null || true
+    pip3 freeze | grep apache-airflow-providers | xargs pip3 uninstall --yes 2>/dev/null || true
     set +x
     echo
     echo "${COLOR_BLUE}Uninstalling just airflow. Dependencies remain. Now target airflow can be reinstalled using mostly cached dependencies${COLOR_RESET}"
