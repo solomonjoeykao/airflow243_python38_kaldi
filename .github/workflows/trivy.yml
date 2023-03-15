@@ -1,0 +1,40 @@
+name: Docker Image CI
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 在 $GITHUB_WORKSPACE 下簽出您的存儲庫，以便您的工作可以訪問它
+      - uses: actions/checkout@v2
+      # 在 Runner 上使用 shell 顯示出 Hello world
+      - name: Run a one-line script
+        run: echo Hello, world!
+        
+      - name: Build an image from Dockerfile
+        id: buildx
+        run: |
+          docker build -t docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }} .
+ 
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }}'
+          format: 'table'
+          timeout: '10m'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'CRITICAL,HIGH, MEDIUM, LOW, UNKNOWN'
+          
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USER_NAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: push gpu image to dockerhub
+        run: docker push docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }}
