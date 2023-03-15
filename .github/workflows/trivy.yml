@@ -13,11 +13,6 @@ jobs:
       # 在 Runner 上使用 shell 顯示出 Hello world
       - name: Run a one-line script
         run: echo Hello, world!
-      
-      - name: Trigger Buildkite Pipeline
-        # You may pin to the exact commit or the version.
-        # uses: buildkite/trigger-pipeline-action@d03b6f2760252274dc019e1298095c3b61baeaf8
-        uses: buildkite/trigger-pipeline-action@v1.2.0
         
       - name: Build an image from Dockerfile
         id: buildx
