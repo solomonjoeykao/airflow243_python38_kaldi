@@ -17,7 +17,7 @@ jobs:
       - name: Build an image from Dockerfile
         id: buildx
         run: |
-          docker buildx build -t docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }} .
+          docker buildx build --no-cache -t docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }} .
  
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
