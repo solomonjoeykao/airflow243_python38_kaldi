@@ -112,6 +112,7 @@ lsb-release netcat openssh-client python3-selinux rsync sasl2-bin sqlite3 sudo u
 
 function install_debian_dev_dependencies() {
     apt-get update
+    apt-get -y install libffi7
     apt-get install --no-install-recommends -yqq apt-utils >/dev/null 2>&1
     apt-get install -y --no-install-recommends curl gnupg2 lsb-release
     # shellcheck disable=SC2086
