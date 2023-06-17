@@ -46,7 +46,7 @@ ARG AIRFLOW_USER_HOME_DIR=/home/airflow
 # latest released version here
 ARG AIRFLOW_VERSION="2.3.4"
 
-ARG PYTHON_BASE_IMAGE="solomonjoeykao/kaldi-srilm-py38:4d8de477fdbe71d2a1f933b0a234fae2512661e0"
+ARG PYTHON_BASE_IMAGE="solomonjoeykao/kaldi-debian10-srilm-py38:f0aa5ac2763e045aa8efa9c4ac1c37418e1ddae5"
 
 ARG AIRFLOW_PIP_VERSION=22.3
 ARG AIRFLOW_IMAGE_REPOSITORY="https://github.com/apache/airflow"
@@ -112,7 +112,6 @@ lsb-release netcat openssh-client python3-selinux rsync sasl2-bin sqlite3 sudo u
 
 function install_debian_dev_dependencies() {
     apt-get update
-    apt-get -y install libffi7
     apt-get install --no-install-recommends -yqq apt-utils >/dev/null 2>&1
     apt-get install -y --no-install-recommends curl gnupg2 lsb-release
     # shellcheck disable=SC2086
