@@ -17,7 +17,7 @@ jobs:
       - name: Build an image from Dockerfile
         id: buildx
         run: |
-          docker buildx build --no-cache -t docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }} .
+          docker buildx build --no-cache -t docker.io/solomonjoeykao/airflow243-kaldi-srilm-py38:${{ github.sha }} .
  
 #       - name: Run Trivy vulnerability scanner
 #         uses: aquasecurity/trivy-action@master
@@ -36,5 +36,5 @@ jobs:
           username: ${{ secrets.DOCKER_USER_NAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: push gpu image to dockerhub
-        run: docker push docker.io/solomonjoeykao/kaldi-srilm-py38:${{ github.sha }}
+      - name: push image to dockerhub
+        run: docker push docker.io/solomonjoeykao/airflow243-kaldi-srilm-py38:${{ github.sha }}
